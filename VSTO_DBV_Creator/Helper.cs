@@ -15,7 +15,7 @@ namespace VSTO_DBV_Creator
             try
             {
                 if (File.Exists(path + "\\" + name))
-                    name = name.Split('.')[0] + "_NEW" + name.Split('.')[1];
+                    name = name.Split('.')[0] + "_NEW.pmlfnc" ;
                 StreamWriter sw = new StreamWriter(path+"\\"+name);
                 sw.Write(text);
                 sw.Close();
