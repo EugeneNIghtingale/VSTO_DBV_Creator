@@ -13,13 +13,15 @@ namespace VSTO_DBV_Creator.Model
     {
 
 
-        public AttributeColumn(string owner, string description, string dbAttribute, string udna, bool promisse)
+        public AttributeColumn(string owner, string description, string dbAttribute, string udna, bool promisse)//, bool isPML)
         {
             Owner = owner;
             DESC = description;
             DBATTRIBUTE = dbAttribute;
             UDNA = udna;
             READONLY = promisse;
+            //IsPML = isPML;
+
         }
         public AttributeColumn(List<string> lstValues)
         {
@@ -27,9 +29,10 @@ namespace VSTO_DBV_Creator.Model
             {
                 Owner = lstValues[0];
                 DESC = lstValues[1];
-                DBATTRIBUTE = lstValues[2];
+                DBATTRIBUTE = lstValues[2].Substring(0,1).Equals(":") ? lstValues[2] : "'"+lstValues[2]+"'";
                 UDNA = lstValues[3];
-                READONLY = Convert.ToBoolean(lstValues[4]);
+                READONLY = Helper.ConvertToBool(lstValues[4]);
+                //IsPML = Helper.ConvertToBool(lstValues[5]);
             }
         }
 
@@ -53,6 +56,8 @@ namespace VSTO_DBV_Creator.Model
         /// READONLY true
         /// </summary>
         public bool READONLY { get; set; }
+
+        //public bool IsPML { get; set; }
 
         public string GetCode()
         {

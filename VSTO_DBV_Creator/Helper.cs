@@ -46,12 +46,21 @@ namespace VSTO_DBV_Creator
             return retValue;
         }
         
+        public static bool ConvertToBool(string val)
+        {
+            if (val.Equals("1") || val.ToLower().Equals("true"))
+                return true;
+            return false;
+        }
+
         private static string GetValue(int iRow, int iColumn)
         {
             var actSheet = Globals.ThisAddIn.Application.ActiveSheet;
             var cell = (Excel.Range)actSheet.Cells[iRow, iColumn];
             return cell.Text;
         }
+
+
     }
  
 }

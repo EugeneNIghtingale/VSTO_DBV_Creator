@@ -16,7 +16,7 @@ namespace VSTO_DBV_Creator.Model
                 Description = lstValues[1];
                 UserDefinedName = lstValues[2];
                 ElementTypes = lstValues[3];
-                AUTCRE = Convert.ToBoolean(lstValues[4]);
+                AUTCRE = Helper.ConvertToBool(lstValues[4]);
             }
         }
 
@@ -33,12 +33,21 @@ namespace VSTO_DBV_Creator.Model
         /// 
         /// </summary>
         public string ElementTypes { get; set; }
+        
         /// <summary>
         /// 
         /// </summary>
         public bool AUTCRE { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public List<SourceElement> lstSourceElements = new List<SourceElement>();
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<AttributeColumn> lstAttributeColumns = new List<AttributeColumn>();
         //List<AttrubuteFilter> lstAttrubuteFilters { get; set; }
         //List<Rule> lstRule { get; set; }
 
@@ -52,6 +61,14 @@ namespace VSTO_DBV_Creator.Model
                 "   ELEL ADD " + ElementTypes + Environment.NewLine +
                 "   AUTCRE " + AUTCRE + Environment.NewLine;
 
+
+            if (lstAttributeColumns.Count != 0)
+            {
+                foreach (AttributeColumn atrElement in lstAttributeColumns)
+                {
+                    retValue += atrElement.GetCode();
+                }
+            }
 
             if (lstSourceElements.Count != 0)
             {
