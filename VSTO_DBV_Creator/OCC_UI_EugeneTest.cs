@@ -51,6 +51,8 @@ namespace VSTO_DBV_Creator
             {
                 if (str[0] == "")
                     break;
+                if (str[0] == "this")
+                    str[0] = "";
                 lstAtr.Add(new Model.AttributeColumn(str));
             }
             #endregion
@@ -61,8 +63,9 @@ namespace VSTO_DBV_Creator
 
             foreach (var itm in attrGroup)
             {
-                if (lstSource.Where(p => p.DESC.Equals(itm.Key)) != null)
+                if (itm.Key != "" && lstSource.Where(p => p.DESC.Equals(itm.Key)) != null)
                     lstSource.Where(p => p.DESC.Equals(itm.Key)).First().lstAttributeColumns.AddRange(itm.ToList());
+                else dataBaseView.lstAttributeColumns.AddRange(itm.ToList());
             }
 
             foreach (var itm in srcGroup)

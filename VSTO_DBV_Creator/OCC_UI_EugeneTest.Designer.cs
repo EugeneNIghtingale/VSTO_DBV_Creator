@@ -46,7 +46,7 @@ namespace VSTO_DBV_Creator
             // 
             this.tab1.ControlId.ControlIdType = Microsoft.Office.Tools.Ribbon.RibbonControlIdType.Office;
             this.tab1.Groups.Add(this.grp_DBV_Constructor);
-            this.tab1.Label = "EugeneTest";
+            this.tab1.Label = "Add-ins";
             this.tab1.Name = "tab1";
             // 
             // grp_DBV_Constructor

@@ -17,6 +17,7 @@ namespace VSTO_DBV_Creator.Model
                 UserDefinedName = lstValues[2];
                 ElementTypes = lstValues[3];
                 AUTCRE = Convert.ToBoolean(lstValues[4]);
+                lstAttributeColumns = new List<AttributeColumn>();
             }
         }
 
@@ -38,6 +39,11 @@ namespace VSTO_DBV_Creator.Model
         /// </summary>
         public bool AUTCRE { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<AttributeColumn> lstAttributeColumns { get; set; }
+
         public List<SourceElement> lstSourceElements = new List<SourceElement>();
         //List<AttrubuteFilter> lstAttrubuteFilters { get; set; }
         //List<Rule> lstRule { get; set; }
@@ -51,7 +57,15 @@ namespace VSTO_DBV_Creator.Model
                 "   UDNA " + "'" + UserDefinedName +"'"  +Environment.NewLine +
                 "   ELEL ADD " + ElementTypes + Environment.NewLine +
                 "   AUTCRE " + AUTCRE + Environment.NewLine;
-
+            
+            if (lstAttributeColumns.Count != 0)
+            {
+                foreach (AttributeColumn attributeColumn in lstAttributeColumns)
+                {
+                    retValue += attributeColumn.GetCode();
+                }
+            }
+           
 
             if (lstSourceElements.Count != 0)
             {
@@ -61,7 +75,7 @@ namespace VSTO_DBV_Creator.Model
                 }
             }
 
-            retValue += "INPUT END";
+            retValue += "END";
             return retValue;
         }
 
