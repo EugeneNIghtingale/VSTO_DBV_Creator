@@ -25,7 +25,7 @@ namespace VSTO_DBV_Creator
             {
                 Excel.Range rngDBV = Globals.ThisAddIn.Application.get_Range("A3:E3");
                 Excel.Range rngSource = Globals.ThisAddIn.Application.get_Range("A7:E100");
-                Excel.Range rngAttr = Globals.ThisAddIn.Application.get_Range("G3:K200");
+                Excel.Range rngAttr = Globals.ThisAddIn.Application.get_Range("G3:L200");
                 var lstDBVValues = Helper.ReadTable(rngDBV);
                 var lstSrcValues = Helper.ReadTable(rngSource);
                 var lstAttrValues = Helper.ReadTable(rngAttr);
