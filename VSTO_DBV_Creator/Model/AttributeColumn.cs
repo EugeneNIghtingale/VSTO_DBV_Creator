@@ -25,14 +25,14 @@ namespace VSTO_DBV_Creator.Model
         }
         public AttributeColumn(List<string> lstValues)
         {
-            if (lstValues.Count == 5)
+            if (lstValues.Count == 6)
             {
-                Owner = lstValues[0];
+                Owner = lstValues[0].Equals("") ? "DBV" : lstValues[0];
                 DESC = lstValues[1];
-                DBATTRIBUTE = lstValues[2].Substring(0,1).Equals(":") ? lstValues[2] : "'"+lstValues[2]+"'";
+                DBATTRIBUTE = lstValues[2];
                 UDNA = lstValues[3];
                 READONLY = Helper.ConvertToBool(lstValues[4]);
-                //IsPML = Helper.ConvertToBool(lstValues[5]);
+                IsPML = lstValues[5];
             }
         }
 
@@ -57,17 +57,32 @@ namespace VSTO_DBV_Creator.Model
         /// </summary>
         public bool READONLY { get; set; }
 
-        //public bool IsPML { get; set; }
+        public string IsPML { get; set; }
 
         public string GetCode()
         {
             string retValue = string.Empty;
-            retValue += "NEW ATTCOLUMN" + Environment.NewLine +
-               "    DESC " + "'" + DESC + "'" + Environment.NewLine +
-               "    DBATTRIBUTE " + DBATTRIBUTE + Environment.NewLine +
-               "    UDNA " + "'" + UDNA + "'" + Environment.NewLine +
-               "    READONLY " + READONLY + Environment.NewLine +
-               "END" + Environment.NewLine;
+            if (IsPML.Equals("PML") || IsPML.Equals("XPATH"))
+            {
+                retValue += "NEW ATTCOLUMN" + Environment.NewLine +
+                    "    DESC " + "'" + DESC + "'" + Environment.NewLine +
+                    "    EXPRESSION " + "'" + DBATTRIBUTE + "'" + Environment.NewLine +
+                    "    EXPTYPE " + "'" + IsPML + "'" + Environment.NewLine +
+                    "    UDNA " + "'" + UDNA + "'" + Environment.NewLine +
+                    "    UTYP TEXT " + Environment.NewLine +
+                    "END" + Environment.NewLine;
+            }
+            else 
+            {
+                retValue += "NEW ATTCOLUMN" + Environment.NewLine +
+                    "    DESC " + "'" + DESC + "'" + Environment.NewLine +
+                    "    DBATTRIBUTE " + DBATTRIBUTE + Environment.NewLine +
+                    "    UDNA " + "'" + UDNA + "'" + Environment.NewLine +
+                    "    READONLY " + READONLY + Environment.NewLine +
+                    "END" + Environment.NewLine;
+
+            }
+            
             return retValue;
         }
     }
