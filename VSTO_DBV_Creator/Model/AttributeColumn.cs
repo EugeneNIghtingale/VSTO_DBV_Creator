@@ -64,7 +64,7 @@ namespace VSTO_DBV_Creator.Model
             string retValue = string.Empty;
             if (IsPML.Equals("PML") || IsPML.Equals("XPATH"))
             {
-                retValue += "NEW ATTCOLUMN" + Environment.NewLine +
+                retValue += "NEW EXPCOLUMN" + Environment.NewLine +
                     "    DESC " + "'" + DESC + "'" + Environment.NewLine +
                     "    EXPRESSION " + "'" + DBATTRIBUTE + "'" + Environment.NewLine +
                     "    EXPTYPE " + "'" + IsPML + "'" + Environment.NewLine +
